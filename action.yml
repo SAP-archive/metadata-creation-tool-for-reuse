@@ -1,0 +1,23 @@
+name: "REUSE Metadata Assistant"
+description: "Generates a REUSE tool metadata proposal based on the declared licenses in the repository"
+inputs:
+  access_token:
+    description: "A personal access token that can be used to read the repository's content, create a new branch and push code to this new branch"
+    required: true
+  copyright_owner:
+    description: "The name of the individual or company that holds the copyright for the code in the repository which doesn't have another copyright notice"
+    required: true
+    default: "SAP SE or an SAP affiliate company"
+  upstream_contact:
+    description: "The name and e-mail address of the contact person/group for this repository."
+    required: true
+    default: "SAP Open Source Program Office <ospo@sap.com>"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ github.server_url }}/${{ github.repository }}
+  env:
+    GITHUB_ACCESS_TOKEN: ${{ inputs.access_token }}
+    COPYRIGHT_OWNER: ${{ inputs.copyright_owner }}
+    UPSTREAM_CONTACT: ${{ inputs.upstream_contact }}

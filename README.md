@@ -1,32 +1,39 @@
-# SAP Repository Template
-
-Default templates for SAP open source repositories, including LICENSE, .reuse/dep5, Code of Conduct, etc... All repositories on github.com/SAP will be created based on this template.
-
-## To-Do
-
-In case you are the maintainer of a new SAP open source project, these are the steps to do with the template files:
-
-- Check if the default license (Apache 2.0) also applies to your project. A license change should only be required in exceptional cases. If this is the case, please change the [license file](LICENSE).
-- Enter the correct metadata for the REUSE tool. See our [wiki page](https://wiki.wdf.sap.corp/wiki/display/ospodocs/Using+the+Reuse+Tool+of+FSFE+for+Copyright+and+License+Information) for details how to do it. You can find an initial .reuse/dep5 file to build on. Please replace the parts inside the single angle quotation marks < > by the specific information for your repository and be sure to run the REUSE tool to validate that the metadata is correct.
-- Adjust the contribution guidelines (e.g. add coding style guidelines, pull request checklists, different license if needed etc.)
-- Add information about your project to this README (name, description, requirements etc). Especially take care for the <your-project> placeholders - those ones need to be replaced with your project name. See the sections below the horizontal line and [our guidelines on our wiki page](https://wiki.wdf.sap.corp/wiki/display/ospodocs/Guidelines+for+README.md+file) what is required and recommended.
-- Remove all content in this README above and including the horizontal line ;)
-
-***
-
-# Our new open source project
+# Metadata Creation Tool for REUSE
 
 ## About this project
 
-*Insert a short description of your project here...*
+This tool automatically creates the REUSE metadata files (dep5, licenses) automatically depending on the declared licenses in an existing repository. It is available as standalone Docker container and can be included in your project as GitHub Action.
+
+These REUSE metadata files are put in a newly created branch called `reuse-metadata-proposal` of the repository it was run for. Afterwards, project maintainers can review and adjust the proposal in this branch and integrate them into the main branch once the data is complete and accurate.
 
 ## Requirements and Setup
 
-*Insert a short description what is required to get your project running...*
+### GitHub Personal Access Token
+
+You need a personal access token with at least `repo` access rights for the repository that you want to create the REUSE metadata files for. Please see the [GitHub documentation on personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) if you need assistance.
+
+### Clone the source code locally
+
+Ensure to have cloned this repository to a local directory.
+
+### Build the Docker container
+
+The default way of using the metadata creation tool is to use it in a Docker Container. Ensure to have a running [Docker runtime](https://docs.docker.com/engine/) installed, then simply build the container using the command `docker build --tag reuse-metadata-creation .` in the local root directory of this project.
+
+### Run the Docker container
+
+After the container is built successfully, you can simply run it with the command `docker run -e GITHUB_ACCESS_TOKEN=<your-access-token> -e COPYRIGHT_OWNER=<copyright-owner-info> -e UPSTREAM_CONTACT=<upstream-contact-info> reuse-metadata-creation <github-repository-url>`. Alternatively, you can of course also use a file containing the environment variables.
+
+- `COPYRIGHT_OWNER` should contain the person or entity that holds the copyright for the respective repository, e.g. 'SAP SE or an SAP affiliate company'
+- `UPSTREAM_CONTACT` should contain the name and e-mail address of the contact for the respective repository, e.g. 'SAP Open Source Program Office <ospo@sap.com>'.
+
+### Setup a GitHub Action
+
+The tool is prepared to run as a GitHub Action. Documentation will follow soon.
 
 ## Support, Feedback, Contributing
 
-This project is open to feature requests/suggestions, bug reports etc. via [GitHub issues](https://github.com/SAP/<your-project>/issues). Contribution and feedback are encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](CONTRIBUTING.md).
+This project is open to feature requests/suggestions, bug reports etc. via [GitHub issues](https://github.com/SAP/metadata-creation-tool-for-reuse/issues). Contribution and feedback are encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](CONTRIBUTING.md).
 
 ## Code of Conduct
 
@@ -34,4 +41,4 @@ We as members, contributors, and leaders pledge to make participation in our com
 
 ## Licensing
 
-Copyright (20xx-)20xx SAP SE or an SAP affiliate company and <your-project> contributors. Please see our [LICENSE](LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/SAP/<your-project>).
+Copyright 2022 SAP SE or an SAP affiliate company and metadata-creation-tool-for-reuse contributors. Please see our [LICENSE](LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/SAP/metadata-creation-tool-for-reuse).
