@@ -1,5 +1,7 @@
 # Metadata Creation Tool for REUSE
 
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP/metadata-creation-tool-for-reuse)](https://api.reuse.software/info/github.com/SAP/metadata-creation-tool-for-reuse)
+
 ## About this project
 
 This tool automatically creates the REUSE metadata files (dep5, licenses) automatically depending on the declared licenses in an existing repository. It is available as standalone Docker container and can be included in your project as GitHub Action.
