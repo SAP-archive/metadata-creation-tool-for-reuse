@@ -18,4 +18,4 @@ RUN pip3 install reuse
 
 RUN mvn clean package
 
-ENTRYPOINT [ "java", "-jar", "target/reuse-assistant-0.0.1-SNAPSHOT-jar-with-dependencies.jar" ]
+ENTRYPOINT [ "java", "-jar", "target/metadata-creation-tool-for-reuse-0.0.1-SNAPSHOT-jar-with-dependencies.jar" ]

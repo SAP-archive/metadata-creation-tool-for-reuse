@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -20,6 +21,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.TextProgressMonitor;
 import org.eclipse.jgit.transport.RefSpec;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
@@ -227,6 +229,7 @@ public class ReuseAssistant {
 		final String repositoryFullName = organizationName + "/" + repositoryName;
 		System.out.println("- Cloning " + repositoryFullName + " into directory " + clonedRepository.toString());
 		CloneCommand cloneCommand = Git.cloneRepository();
+		cloneCommand.setProgressMonitor(new TextProgressMonitor(new PrintWriter(System.out)));
 		cloneCommand.setCredentialsProvider(
 				new UsernamePasswordCredentialsProvider(System.getenv(GITHUB_ACCESS_TOKEN), ""));
 		try {
