@@ -29,7 +29,27 @@ After the container is built successfully, you can simply run it with the comman
 
 ### Setup a GitHub Action
 
-The tool is prepared to run as a GitHub Action. Documentation will follow soon.
+The tool is prepared to run as a GitHub Action. Create a workflow runner file in the respective repository under `.github/workflows`, e.g. called `reuse.yaml`. A working sample content would look like that:
+
+```
+name: "Launch Metadata Creation Tool for REUSE"
+on:
+  workflow_dispatch: ~
+
+jobs:
+  create_metadata_proposal:
+    runs-on: ubuntu-latest
+    name: "Metadata Creation Tool"
+    steps:
+      - uses: SAP/metadata-creation-tool-for-reuse@main
+        with:
+          repository_url: "${{ github.server_url }}/${{ github.repository }}"
+          access_token: "${{ secrets.REUSE_ACCESS_TOKEN }}"
+          copyright_owner: "Your name comes here"
+          upstream_contact: "Your name comes here <yourname@yourdomain.something>"
+```
+
+The required personal access token is stored in the [secrets of the respective repository](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `REUSE_ACCESS_TOKEN`. If you store it under another name, ensure to have the variable name adjusted here as well.
 
 ## Support, Feedback, Contributing
 

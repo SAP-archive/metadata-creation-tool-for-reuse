@@ -1,6 +1,9 @@
-name: "REUSE Metadata Assistant"
+name: "Metadata Creation Tool for REUSE"
 description: "Generates a REUSE tool metadata proposal based on the declared licenses in the repository"
 inputs:
+  repository_url:
+    description: "The GitHub repository URL the metadata creation tool for REUSE should run for"
+    required: true
   access_token:
     description: "A personal access token that can be used to read the repository's content, create a new branch and push code to this new branch"
     required: true
@@ -16,7 +19,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ github.server_url }}/${{ github.repository }}
+    - ${{ inputs.repository_url }}
   env:
     GITHUB_ACCESS_TOKEN: ${{ inputs.access_token }}
     COPYRIGHT_OWNER: ${{ inputs.copyright_owner }}
