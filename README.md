@@ -1,3 +1,11 @@
+## Deprecation Notice
+
+This public repository is read-only and no longer maintained.
+
+![](https://img.shields.io/badge/STATUS-NOT%20CURRENTLY%20MAINTAINED-red.svg?longCache=true&style=flat)
+
+---
+
 # Metadata Creation Tool for REUSE
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP/metadata-creation-tool-for-reuse)](https://api.reuse.software/info/github.com/SAP/metadata-creation-tool-for-reuse)
